@@ -62,6 +62,31 @@ Visit `http://127.0.0.1:3000/02-static-content` for the custom file and `http://
 
 ## Render views
 
+Install necessary packages
+
+```bash
+npm install point-of-view handlebars
+```
+
+Create a `view` directory and configure the app
+
+```js
+const pointOfView = require('point-of-view')
+const handlebars = require('handlebars')
+
+/** @type import('fastify').FastifyPluginAsync */
+module.exports = async function (fastify, opts) {
+  fastify.register(pointOfView, {
+    engine: { handlebars },
+    root: path.join(__dirname, 'views'),
+    layout: 'layout.hbs',
+  })
+```
+
+Build out the routes as per [here](/routes/03-render-views/index.js) and visit
+`http://127.0.0.1:3000/03-render-views?name=dina`
+
+
 ## RESTful JSON service
 
 ## Aggregate response from multiple sources
