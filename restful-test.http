@@ -1,0 +1,29 @@
+@hostname = 127.0.0.1
+@port = 3000
+@baseUrl = http://{{hostname}}:{{port}}/04-restful-service
+@contentType = application/json
+
+### POST one todo
+POST {{baseUrl}}/
+content-type: {{contentType}}
+
+{
+  "message": "todo 1",
+  "done": false
+}
+
+### GET todos
+GET {{baseUrl}}/
+
+### GET single todo by id
+GET {{baseUrl}}/1
+
+### PATCH a todo
+PATCH {{baseUrl}}/2
+Content-Type: {{contentType}}
+{
+  "message": "todo patched",
+  "done": false
+}
+
+DELETE {{baseUrl}}/2

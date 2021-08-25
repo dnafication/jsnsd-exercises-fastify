@@ -1,17 +1,16 @@
 # jsnsd-exercises-fastify
 
-Following topics are being covered in this repo:
+My notes for Following topics are being covered in this repo:
 
-- [jsnsd-exercises-fastify](#jsnsd-exercises-fastify)
-  - [Create a basic webserver](#create-a-basic-webserver)
-  - [Serve a static content](#serve-a-static-content)
-  - [Render views](#render-views)
-  - [RESTful JSON service](#restful-json-service)
-  - [Aggregate response from multiple sources](#aggregate-response-from-multiple-sources)
-  - [HTTP proxy services](#http-proxy-services)
-  - [Web Security](#web-security)
+- [01 Create a basic webserver](#01-create-a-basic-webserver)
+- [02 Serve a static content](#02-serve-a-static-content)
+- [03 Render views](#03-render-views)
+- [04 RESTful JSON service](#04-restful-json-service)
+- [05 Aggregate response from multiple sources](#05-aggregate-response-from-multiple-sources)
+- [06 HTTP proxy services](#06-http-proxy-services)
+- [07 Web Security](#07-web-security)
 
-## Create a basic webserver
+## 01 Create a basic webserver
 
 [Getting started guide](https://www.fastify.io/docs/latest/Getting-Started/#your-first-server) on Fastify documentation is excellent resource for creating
 a basic server.
@@ -36,7 +35,7 @@ Integrating Fastify into an existing project:
 npm init fastify -- --integrate
 ```
 
-## Serve a static content
+## 02 Serve a static content
 
 Install [fastify-static](https://www.npmjs.com/package/fastify-static) and configure a particular directory to serve.
 
@@ -60,9 +59,9 @@ module.exports = async function (fastify, opts) {
 
 Visit `http://127.0.0.1:3000/02-static-content` for the custom file and `http://127.0.0.1:3000/pub/about.html` since the public directory is mounted on `/pub/` path.
 
-## Render views
+## 03 Render views
 
-Install necessary packages
+Install necessary packages. Read more about [point-of-view](https://github.com/fastify/point-of-view) and [handlebars](https://handlebarsjs.com/).
 
 ```bash
 npm install point-of-view handlebars
@@ -86,11 +85,17 @@ module.exports = async function (fastify, opts) {
 Build out the routes as per [here](/routes/03-render-views/index.js) and visit
 `http://127.0.0.1:3000/03-render-views?name=dina`
 
+## 04 RESTful JSON service
 
-## RESTful JSON service
+A basic To-Do service that will allow CRUD operations and will
+be interacting with a SQLite database for persistance.
 
-## Aggregate response from multiple sources
+```bash
+npm install sequelize sqlite3
+```
 
-## HTTP proxy services
+## 05 Aggregate response from multiple sources
 
-## Web Security
+## 06 HTTP proxy services
+
+## 07 Web Security
