@@ -94,6 +94,38 @@ be interacting with a SQLite database for persistance.
 npm install sequelize sqlite3
 ```
 
+Built a plugin that decorates `fastify` instance with `models` function. It can be an object as well.
+
+```js
+const fp = require('fastify-plugin')
+
+const { db } = require('../db')
+// initialize models
+const makeTodoModel = require('../models/todo')
+const Todo = makeTodoModel(db)
+
+module.exports = fp(async function (fastify, opts) {
+  fastify.decorate('models', function () {
+    return { db, Todo }
+  })
+})
+```
+
+Now you can use the function in the routes
+
+```js
+module.exports = async (fastify, opts) => {
+  const { Todo } = fastify.models()
+  fastify.get('/', async (request, reply) => {
+    try {
+      const todos = await Todo.findAll()
+      return todos.map((t) => t.toJSON())
+    } catch (error) {
+      throw error
+    }
+  })
+```
+
 ## 05 Aggregate response from multiple sources
 
 ## 06 HTTP proxy services

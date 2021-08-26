@@ -16,14 +16,16 @@ content-type: {{contentType}}
 GET {{baseUrl}}/
 
 ### GET single todo by id
-GET {{baseUrl}}/1
+GET {{baseUrl}}/3
 
 ### PATCH a todo
-PATCH {{baseUrl}}/2
+PATCH {{baseUrl}}/66
 Content-Type: {{contentType}}
+
 {
   "message": "todo patched",
   "done": false
 }
 
-DELETE {{baseUrl}}/2
+### Delete 
+DELETE {{baseUrl}}/1
