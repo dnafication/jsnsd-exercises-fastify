@@ -9,6 +9,8 @@ My notes for Following topics are being covered in this repo:
 - [05 Aggregate response from multiple sources](#05-aggregate-response-from-multiple-sources)
 - [06 HTTP proxy services](#06-http-proxy-services)
 - [07 Web Security](#07-web-security)
+- [Bonus: Swagger](#bonus-swagger)
+- [Handy Fastify plugins & resources](#handy-fastify-plugins--resources)
 
 ## 01 Create a basic webserver
 
@@ -57,8 +59,8 @@ module.exports = async function (fastify, opts) {
   })
 ```
 
-Visit `http://127.0.0.1:3000/02-static-content` for the custom file 
-and `http://127.0.0.1:3000/pub/about.html` since the public directory 
+Visit `http://127.0.0.1:3000/02-static-content` for the custom file
+and `http://127.0.0.1:3000/pub/about.html` since the public directory
 is mounted on `/pub/` path.
 
 ## 03 Render views
@@ -96,7 +98,7 @@ be interacting with a SQLite database for persistance.
 npm install sequelize sqlite3
 ```
 
-Built a plugin that decorates `fastify` instance with `models` function. 
+A plugin is added that decorates `fastify` instance with `models` function.
 It can be an object as well.
 
 ```js
@@ -131,10 +133,10 @@ module.exports = async (fastify, opts) => {
 
 ## 05 Aggregate response from multiple sources
 
-For this we will be consuming [Rick and Morty API](https://rickandmortyapi.com/documentation/#rest)
+For this, we are consuming [Rick and Morty API](https://rickandmortyapi.com/documentation/#rest)
 in our main application.
 
-A http client `got` will be installed for the ease of use in our application. 
+A http client `got` is installed for the ease of use in our application.
 
 ```bash
 npm i got
@@ -152,4 +154,67 @@ Use the file `./aggregate-test.http` to test out the API.
 
 ## 06 HTTP proxy services
 
+Install the required packages
+
+- [fastify-reply-from](https://github.com/fastify/fastify-reply-from)
+- [fastify-http-proxy](https://github.com/fastify/fastify-http-proxy)
+
+```bash
+npm install fastify-reply-from fastify-http-proxy
+```
+
+**Single route: multi origin** proxy
+
+Register the plugin and define the route that will return the response from the url passed in through the query parameter.
+The plugin `fastify-reply-from` decorates `reply` object with `from` function which accepts
+urls.
+
+```js
+fastify.get('/', async function (request, reply) {
+  const { url } = request.query
+  try {
+    new URL(url)
+  } catch (err) {
+    throw fastify.httpErrors.badRequest()
+  }
+  return reply.from(url)
+})
+```
+
+Visit url: `http://127.0.0.1:3000/06-proxy/?url=https://github.com/fastify`
+
+**Using http proxy:** single-origin, multi route proxy
+
+Register the plugin below and pass in the configuration object. The proxy in the example
+below will be mounted on `/rickandmorty`.
+
+```js
+fastify.register(require('fastify-http-proxy'), {
+  upstream: 'https://rickandmortyapi.com/api/episode',
+  prefix: '/rickandmorty',
+})
+```
+
+Visit `http://127.0.0.1:3000/rickandmorty/3` which is now a proxy to `https://rickandmortyapi.com/api/episode/3`
+
 ## 07 Web Security
+
+## Bonus: Swagger
+
+## Handy Fastify plugins & resources
+
+The list of core and community plugins [are listed here](https://www.fastify.io/docs/latest/Ecosystem/).
+Following plugins and packages were used in this project.
+
+- [fastify-sensible](https://github.com/fastify/fastify-sensible)
+- [fastify-auth](https://github.com/fastify/fastify-auth)
+- [fastify-jwt](https://github.com/fastify/fastify-jwt)
+- [point-of-view](https://github.com/fastify/point-of-view)
+- [fastify-static](https://github.com/fastify/fastify-static)
+- [fastify-swagger](https://github.com/fastify/fastify-swagger)
+- [fastify-reply-from](https://github.com/fastify/fastify-reply-from)
+- [fastify-http-proxy](https://github.com/fastify/fastify-http-proxy)
+
+[Ready to get started?](https://www.fastify.io/docs/latest/Getting-Started/)
+
+![fastify logo](https://www.fastify.io/images/fastify-logo-inverted.2180cc6b1919d47a.png)

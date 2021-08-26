@@ -8,12 +8,21 @@ const fastifyStatic = require('fastify-static')
 const pointOfView = require('point-of-view')
 const handlebars = require('handlebars')
 
+const replyFrom = require('fastify-reply-from')
+
 /** @type import('fastify').FastifyPluginAsync */
 module.exports = async function (fastify, opts) {
   // Place here your custom code!
   fastify.register(fastifyStatic, {
     root: path.join(__dirname, 'public'),
     prefix: '/pub/',
+  })
+
+  fastify.register(replyFrom)
+
+  fastify.register(require('fastify-http-proxy'), {
+    upstream: 'https://rickandmortyapi.com/api/episode',
+    prefix: '/rickandmorty',
   })
 
   fastify.register(pointOfView, {
