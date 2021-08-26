@@ -306,6 +306,4 @@ Following plugins and packages were used in this project.
 
 ![fastify logo](https://www.fastify.io/images/fastify-logo-inverted.2180cc6b1919d47a.png)
 
-```
-
-```
+---
