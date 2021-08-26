@@ -1,0 +1,17 @@
+### querystring validation
+GET http://localhost:3000/07-security/withValidation?name=the%20weekend&name=camilla
+
+### 
+GET http://localhost:3000/07-security/withValidation?name=camilla&age=33
+
+### post with validation
+POST http://localhost:3000/07-security/withValidation/45
+Content-Type: 'application/json'
+
+{
+  "name": "dina",
+  "yellow": 45
+}
+
+### blocked ip
+GET http://localhost:3000/08-blocked

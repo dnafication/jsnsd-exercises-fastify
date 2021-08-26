@@ -13,7 +13,7 @@ module.exports = async (fastify, opts) => {
       return character
     } catch (error) {
       if (!error.response) throw error
-      if (error.response.statusCode === 404) reply.notFound()
+      if (error.response.statusCode === 404) return reply.notFound()
       throw error
     }
   })
@@ -24,7 +24,7 @@ module.exports = async (fastify, opts) => {
       return location
     } catch (error) {
       if (!error.response) throw error
-      if (error.response.statusCode === 404) reply.notFound()
+      if (error.response.statusCode === 404) return reply.notFound()
       throw error
     }
   })
