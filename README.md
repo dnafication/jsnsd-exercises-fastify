@@ -57,7 +57,9 @@ module.exports = async function (fastify, opts) {
   })
 ```
 
-Visit `http://127.0.0.1:3000/02-static-content` for the custom file and `http://127.0.0.1:3000/pub/about.html` since the public directory is mounted on `/pub/` path.
+Visit `http://127.0.0.1:3000/02-static-content` for the custom file 
+and `http://127.0.0.1:3000/pub/about.html` since the public directory 
+is mounted on `/pub/` path.
 
 ## 03 Render views
 
@@ -94,7 +96,8 @@ be interacting with a SQLite database for persistance.
 npm install sequelize sqlite3
 ```
 
-Built a plugin that decorates `fastify` instance with `models` function. It can be an object as well.
+Built a plugin that decorates `fastify` instance with `models` function. 
+It can be an object as well.
 
 ```js
 const fp = require('fastify-plugin')
@@ -127,6 +130,25 @@ module.exports = async (fastify, opts) => {
 ```
 
 ## 05 Aggregate response from multiple sources
+
+For this we will be consuming [Rick and Morty API](https://rickandmortyapi.com/documentation/#rest)
+in our main application.
+
+A http client `got` will be installed for the ease of use in our application. 
+
+```bash
+npm i got
+
+# define following env variables that will be used by the service.
+# injecting variables this way is normal for consuming from dynamic dependent
+# services
+
+export CHARACTER_SERVICE=https://rickandmortyapi.com/api/character
+export LOCATION_SERVICE=https://rickandmortyapi.com/api/location
+
+```
+
+Use the file `./aggregate-test.http` to test out the API.
 
 ## 06 HTTP proxy services
 

@@ -1,0 +1,23 @@
+@baseUrl = http://127.0.0.1:3000/05-aggregate-multiple
+@contentType = application/json
+
+### POST will fail as its not allowed
+POST {{baseUrl}}/
+content-type: {{contentType}}
+
+{
+  "message": "todo 1",
+  "done": false
+}
+
+### GET - fail as its not defined
+GET {{baseUrl}}/
+
+### GET single rick and morty character by id
+GET {{baseUrl}}/character/3445
+
+### GET single location by id
+GET {{baseUrl}}/location/3
+
+### GET location of the character by using character id
+GET {{baseUrl}}/locationOfChar/3
