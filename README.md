@@ -1,6 +1,6 @@
 # jsnsd-exercises-fastify
 
-My notes for Following topics are being covered in this repo:
+My practice repo and notes for [JSNSD certification](https://training.linuxfoundation.org/certification/jsnsd/). Following topics are being covered in this repo:
 
 - [01 Create a basic webserver](#01-create-a-basic-webserver)
 - [02 Serve a static content](#02-serve-a-static-content)

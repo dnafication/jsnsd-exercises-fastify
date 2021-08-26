@@ -1,7 +1,7 @@
 {
   "name": "jsnsd-exercises-fastify",
   "version": "1.0.0",
-  "description": "",
+  "description": "practice app and notes for JSNSD Certification prep",
   "main": "app.js",
   "directories": {
     "test": "test"
@@ -11,7 +11,12 @@
     "start": "fastify start -l info app.js",
     "dev": "fastify start -w -l info -P app.js"
   },
-  "keywords": [],
+  "keywords": [
+    "jsnsd",
+    "fastify",
+    "practice",
+    "notes"
+  ],
   "author": "",
   "license": "ISC",
   "dependencies": {
